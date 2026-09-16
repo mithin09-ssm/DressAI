@@ -6,21 +6,22 @@ import { useState } from "react";
 export default function TryOn() {
   const [personImage, setPersonImage] = useState(null);
   const [outfitImage, setOutfitImage] = useState(null);
+
   const handlePersonUpload = (event) => {
-  const file = event.target.files[0];
+    const file = event.target.files[0];
 
-  if (file) {
-    setPersonImage(URL.createObjectURL(file));
-  }
-};
+    if (file) {
+      setPersonImage(URL.createObjectURL(file));
+    }
+  };
 
-const handleOutfitUpload = (event) => {
-  const file = event.target.files[0];
+  const handleOutfitUpload = (event) => {
+    const file = event.target.files[0];
 
-  if (file) {
-    setOutfitImage(URL.createObjectURL(file));
-  }
-};
+    if (file) {
+      setOutfitImage(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -63,15 +64,20 @@ const handleOutfitUpload = (event) => {
                 Upload Your Photo
               </p>
 
-              <button className="mt-5 rounded-xl bg-orange-500 px-6 py-3 font-medium hover:bg-orange-400">
-                Choose Photo
-              </button>
               <input
-  type="file"
-  accept="image/*"
-  onChange={handlePersonUpload}
-  className="mt-4"
-/>
+                id="person-upload"
+                type="file"
+                accept="image/*"
+                onChange={handlePersonUpload}
+                hidden
+              />
+
+              <label
+                htmlFor="person-upload"
+                className="mt-5 cursor-pointer rounded-xl bg-orange-500 px-6 py-3 font-medium hover:bg-orange-400"
+              >
+                Choose Photo
+              </label>
             </div>
           </div>
 
@@ -87,15 +93,20 @@ const handleOutfitUpload = (event) => {
                 Upload Outfit
               </p>
 
-              <button className="mt-5 rounded-xl bg-orange-500 px-6 py-3 font-medium hover:bg-orange-400">
-                Choose Outfit
-              </button>
               <input
-  type="file"
-  accept="image/*"
-  onChange={handleOutfitUpload}
-  className="mt-4"
-/>
+                id="outfit-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleOutfitUpload}
+                hidden
+              />
+
+              <label
+                htmlFor="outfit-upload"
+                className="mt-5 cursor-pointer rounded-xl bg-orange-500 px-6 py-3 font-medium hover:bg-orange-400"
+              >
+                Choose Outfit
+              </label>
             </div>
           </div>
 
@@ -109,28 +120,28 @@ const handleOutfitUpload = (event) => {
           <div className="mt-6 grid gap-6 md:grid-cols-3">
 
             <div className="flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-slate-900">
-  {personImage ? (
-    <img
-      src={personImage}
-      alt="Person"
-      className="h-full w-full object-cover"
-    />
-  ) : (
-    "Person Photo"
-  )}
-</div>
+              {personImage ? (
+                <img
+                  src={personImage}
+                  alt="Person"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                "Person Photo"
+              )}
+            </div>
 
-           <div className="flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-slate-900">
-  {outfitImage ? (
-    <img
-      src={outfitImage}
-      alt="Outfit"
-      className="h-full w-full object-cover"
-    />
-  ) : (
-    "Outfit Photo"
-  )}
-</div>
+            <div className="flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-slate-900">
+              {outfitImage ? (
+                <img
+                  src={outfitImage}
+                  alt="Outfit"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                "Outfit Photo"
+              )}
+            </div>
 
             <div className="flex h-64 items-center justify-center rounded-2xl bg-slate-900">
               AI Result
@@ -138,9 +149,20 @@ const handleOutfitUpload = (event) => {
 
           </div>
 
-          <button className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400">
-            Generate Look
-          </button>
+         <button
+  type="button"
+  onClick={() => {
+    if (!personImage || !outfitImage) {
+      alert("Please upload both your photo and outfit first.");
+      return;
+    }
+
+    alert("Ready for AI try-on!");
+  }}
+  className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400"
+>
+  Generate Look
+</button>
         </div>
 
       </div>
