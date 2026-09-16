@@ -6,7 +6,7 @@ export default function Home() {
       <div className="relative flex min-h-screen flex-col">
         <header className="flex items-center justify-between px-8 py-6 md:px-12">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">DressAI</h2>
+            <h2 className="text-2xl font-bold tracking-tight">MirrorFit</h2>
             <p className="text-xs uppercase tracking-[0.25em] text-orange-100">
               AI Virtual Try-On
             </p>
@@ -28,7 +28,7 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl font-black tracking-tight sm:text-6xl md:text-7xl">
-              Welcome to DressAI
+              Welcome to MirrorFit
             </h1>
 
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-orange-50 sm:text-xl">
@@ -61,7 +61,7 @@ export default function Home() {
         </section>
 
         <footer className="px-8 py-5 text-center text-xs text-orange-100">
-          DressAI — Reimagine your wardrobe with AI
+          MirrorFit — Reimagine your wardrobe with AI
         </footer>
       </div>
     </main>

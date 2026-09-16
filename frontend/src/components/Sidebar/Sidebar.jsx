@@ -2,7 +2,7 @@ export default function Sidebar() {
   return (
     <aside className="w-64 border-r border-gray-200 bg-white p-6">
       <h1 className="mb-10 text-3xl font-bold text-orange-500">
-        DressAI
+        MirrorFit
       </h1>
 
       <nav className="space-y-4">

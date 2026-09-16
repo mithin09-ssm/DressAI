@@ -36,7 +36,7 @@ export default function TryOn() {
           </Link>
 
           <p className="text-sm text-slate-500">
-            DressAI Try-On
+            MirrorFit Try-On
           </p>
         </div>
 
