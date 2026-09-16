@@ -4,12 +4,12 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 
 export default function Studio() {
   return (
-    <main className="flex min-h-screen">
+    <main className="flex min-h-screen bg-black">
       <Sidebar />
 
       <section className="flex-1 p-8">
-        <h1 className="mb-8 text-4xl font-bold">
-          Welcome Back
+        <h1 className="mb-8 text-4xl font-bold text-white">
+          MirrorFit Studio
         </h1>
 
         <CreateLook />
