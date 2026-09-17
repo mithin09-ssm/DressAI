@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function TryOn() {
+export default function CreatePage() {
   const [personImage, setPersonImage] = useState(null);
   const [outfitImage, setOutfitImage] = useState(null);
+
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [resultReady, setResultReady] = useState(false);
 
   const handlePersonUpload = (event) => {
     const file = event.target.files[0];
@@ -21,6 +24,21 @@ export default function TryOn() {
     if (file) {
       setOutfitImage(URL.createObjectURL(file));
     }
+  };
+
+  const handleGenerate = () => {
+    if (!personImage || !outfitImage) {
+      alert("Please upload both your photo and outfit first.");
+      return;
+    }
+
+    setResultReady(false);
+    setIsGenerating(true);
+
+    setTimeout(() => {
+      setIsGenerating(false);
+      setResultReady(true);
+    }, 2000);
   };
 
   return (
@@ -113,6 +131,7 @@ export default function TryOn() {
         </div>
 
         <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+
           <h2 className="text-xl font-semibold">
             Preview
           </h2>
@@ -144,25 +163,36 @@ export default function TryOn() {
             </div>
 
             <div className="flex h-64 items-center justify-center rounded-2xl bg-slate-900">
-              AI Result
+
+              {isGenerating ? (
+                <div className="text-center">
+                  <div className="text-5xl">⏳</div>
+                  <p className="mt-3">Generating...</p>
+                </div>
+              ) : resultReady ? (
+                <div className="text-center">
+                  <div className="text-5xl">✨</div>
+                  <p className="mt-3 font-semibold">
+                    AI Result Ready
+                  </p>
+                </div>
+              ) : (
+                "AI Result"
+              )}
+
             </div>
 
           </div>
 
-         <button
-  type="button"
-  onClick={() => {
-    if (!personImage || !outfitImage) {
-      alert("Please upload both your photo and outfit first.");
-      return;
-    }
+          <button
+            type="button"
+            onClick={handleGenerate}
+            disabled={isGenerating}
+            className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400 disabled:opacity-50"
+          >
+            {isGenerating ? "Generating..." : "Generate Look"}
+          </button>
 
-    alert("Ready for AI try-on!");
-  }}
-  className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400"
->
-  Generate Look
-</button>
         </div>
 
       </div>
