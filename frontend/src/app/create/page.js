@@ -6,9 +6,27 @@ import { useState } from "react";
 export default function CreatePage() {
   const [personImage, setPersonImage] = useState(null);
   const [outfitImage, setOutfitImage] = useState(null);
-
   const [isGenerating, setIsGenerating] = useState(false);
   const [resultReady, setResultReady] = useState(false);
+
+  const saveToHistory = () => {
+    const history = JSON.parse(
+      localStorage.getItem("mirrorfit-history") || "[]"
+    );
+
+    const newLook = {
+      id: Date.now(),
+      image: personImage,
+      title: "AI Generated Look",
+    };
+
+    history.unshift(newLook);
+
+    localStorage.setItem(
+      "mirrorfit-history",
+      JSON.stringify(history)
+    );
+  };
 
   const handlePersonUpload = (event) => {
     const file = event.target.files[0];
@@ -38,6 +56,7 @@ export default function CreatePage() {
     setTimeout(() => {
       setIsGenerating(false);
       setResultReady(true);
+      saveToHistory();
     }, 2000);
   };
 
@@ -170,20 +189,18 @@ export default function CreatePage() {
                   <p className="mt-3">Generating...</p>
                 </div>
               ) : resultReady ? (
-  <div className="relative h-full w-full">
+                <div className="relative h-full w-full">
+                  <img
+                    src={personImage}
+                    alt="AI Result"
+                    className="h-full w-full object-cover"
+                  />
 
-    <img
-      src={personImage}
-      alt="AI Result"
-      className="h-full w-full object-cover"
-    />
-
-    <div className="absolute left-3 top-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-black">
-      ✨ AI Generated
-    </div>
-
-  </div>
-) : (
+                  <div className="absolute left-3 top-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-black">
+                    ✨ AI Generated
+                  </div>
+                </div>
+              ) : (
                 "AI Result"
               )}
 
@@ -198,10 +215,10 @@ export default function CreatePage() {
             className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400 disabled:opacity-50"
           >
             {isGenerating
-  ? "Generating..."
-  : resultReady
-  ? "Generate Again"
-  : "Generate Look"}
+              ? "Generating..."
+              : resultReady
+              ? "Generate Again"
+              : "Generate Look"}
           </button>
 
         </div>

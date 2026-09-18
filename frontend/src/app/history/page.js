@@ -1,32 +1,18 @@
+"use client";
+
 import Sidebar from "@/components/Sidebar/Sidebar";
+import { useEffect, useState } from "react";
 
 export default function HistoryPage() {
-  const looks = [
-    {
-      id: 1,
-      title: "Casual Fit",
-    },
-    {
-      id: 2,
-      title: "Formal Look",
-    },
-    {
-      id: 3,
-      title: "Party Style",
-    },
-    {
-      id: 4,
-      title: "Traditional Wear",
-    },
-    {
-      id: 5,
-      title: "Street Fashion",
-    },
-    {
-      id: 6,
-      title: "Summer Outfit",
-    },
-  ];
+  const [looks, setLooks] = useState([]);
+
+  useEffect(() => {
+    const savedLooks = JSON.parse(
+      localStorage.getItem("mirrorfit-history") || "[]"
+    );
+
+    setLooks(savedLooks);
+  }, []);
 
   return (
     <main className="flex min-h-screen bg-black">
@@ -38,30 +24,34 @@ export default function HistoryPage() {
         </h1>
 
         <p className="mt-3 text-zinc-400">
-          Your previously generated looks will appear here.
+          Your generated looks.
         </p>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {looks.map((look) => (
-            <div
-              key={look.id}
-              className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 transition hover:-translate-y-1 hover:border-orange-500"
-            >
-              <div className="flex h-52 items-center justify-center bg-zinc-800 text-6xl">
-                👗
-              </div>
-
-              <div className="p-5">
-                <h2 className="text-lg font-semibold text-white">
-                  {look.title}
-                </h2>
-
-                <p className="mt-2 text-sm text-zinc-400">
-                  AI generated outfit preview.
-                </p>
-              </div>
+          {looks.length === 0 ? (
+            <div className="text-zinc-500">
+              No generated looks yet.
             </div>
-          ))}
+          ) : (
+            looks.map((look) => (
+              <div
+                key={look.id}
+                className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900"
+              >
+                <img
+                  src={look.image}
+                  alt={look.title}
+                  className="h-56 w-full object-cover"
+                />
+
+                <div className="p-4">
+                  <h2 className="font-semibold text-white">
+                    {look.title}
+                  </h2>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </section>
     </main>
