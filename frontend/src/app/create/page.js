@@ -170,13 +170,20 @@ export default function CreatePage() {
                   <p className="mt-3">Generating...</p>
                 </div>
               ) : resultReady ? (
-                <div className="text-center">
-                  <div className="text-5xl">✨</div>
-                  <p className="mt-3 font-semibold">
-                    AI Result Ready
-                  </p>
-                </div>
-              ) : (
+  <div className="relative h-full w-full">
+
+    <img
+      src={personImage}
+      alt="AI Result"
+      className="h-full w-full object-cover"
+    />
+
+    <div className="absolute left-3 top-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-black">
+      ✨ AI Generated
+    </div>
+
+  </div>
+) : (
                 "AI Result"
               )}
 
@@ -190,7 +197,11 @@ export default function CreatePage() {
             disabled={isGenerating}
             className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold hover:bg-orange-400 disabled:opacity-50"
           >
-            {isGenerating ? "Generating..." : "Generate Look"}
+            {isGenerating
+  ? "Generating..."
+  : resultReady
+  ? "Generate Again"
+  : "Generate Look"}
           </button>
 
         </div>
