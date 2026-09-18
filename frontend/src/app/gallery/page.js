@@ -42,7 +42,17 @@ export default function GalleryPage() {
 
         {looks.length === 0 ? (
           <div className="mt-10 rounded-3xl border border-zinc-800 bg-zinc-900 p-10 text-center text-zinc-400">
-            No looks available yet.
+            <div className="mt-10 rounded-3xl border border-zinc-800 bg-zinc-900 p-10 text-center">
+  <div className="text-6xl">🖼️</div>
+
+  <h2 className="mt-4 text-2xl font-semibold text-white">
+    Gallery Empty
+  </h2>
+
+  <p className="mt-2 text-zinc-400">
+    Generate and save your first look.
+  </p>
+</div>
           </div>
         ) : (
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

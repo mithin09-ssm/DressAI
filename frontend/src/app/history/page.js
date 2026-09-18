@@ -34,7 +34,17 @@ export default function HistoryPage() {
 
       {looks.length === 0 ? (
         <div className="rounded-2xl border border-zinc-800 p-10 text-center text-zinc-400">
-          No generated looks yet.
+         <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-10 text-center">
+  <div className="text-6xl">📂</div>
+
+  <h2 className="mt-4 text-2xl font-semibold text-white">
+    No Looks Yet
+  </h2>
+
+  <p className="mt-2 text-zinc-400">
+    Create your first AI look in MirrorFit.
+  </p>
+</div>
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

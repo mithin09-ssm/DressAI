@@ -7,9 +7,9 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 border-r border-zinc-800 bg-zinc-950 p-6">
-      <h1 className="mb-10 text-3xl font-bold text-orange-500">
-        MirrorFit
-      </h1>
+      <h1 className="mb-10 flex items-center gap-2 text-3xl font-bold text-orange-500">
+  🪞 MirrorFit
+</h1>
 
       <nav className="space-y-3">
 
